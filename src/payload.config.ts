@@ -34,6 +34,7 @@ export default buildConfig({
         // whitelist of domains to allow cookie auth from
         `http://localhost:5173`,
         `http://localhost:${process.env.PORT || 3000}`,
+        "https://travelblogcms.onrender.com",
     ],
     typescript: {
         outputFile: path.resolve(__dirname, "payload-types.ts"),
