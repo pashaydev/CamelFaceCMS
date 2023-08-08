@@ -35,6 +35,7 @@ export default buildConfig({
         `http://localhost:5173`,
         `http://localhost:${process.env.PORT || 3000}`,
         "https://travelblogcms.onrender.com",
+        "https://travel-blog-front-kappa.vercel.app",
     ],
     typescript: {
         outputFile: path.resolve(__dirname, "payload-types.ts"),

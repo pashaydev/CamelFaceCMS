@@ -1,5 +1,6 @@
 import express from "express";
 import payload from "payload";
+import cors from "cors";
 
 require("dotenv").config();
 const app = express();
@@ -8,6 +9,8 @@ const app = express();
 app.get("/", (_, res) => {
     res.redirect("/admin");
 });
+
+app.use(cors({ origin: ["https://travel-blog-front-kappa.vercel.app", "http://localhost:5173"] }));
 
 const start = async () => {
     // Initialize Payload
