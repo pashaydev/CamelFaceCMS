@@ -10,6 +10,35 @@ app.get("/", (_, res) => {
     res.redirect("/admin");
 });
 
+app.get("/reset-password", async (_, res) => {
+    const json = await resetPassword();
+    res.send(json);
+});
+
+const resetPassword = async () => {
+    const token = await payload.forgotPassword({
+        collection: "admin-users",
+        data: {
+            email: "yakubovskypasha@gmail.com",
+        },
+        disableEmail: false, // you can disable the auto-generation of email via local API
+    });
+
+    const res = await fetch(`https://travelblogcms.onrender.com/api/admin-users/reset-password`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            token: token,
+            password: "Aasdasd213vvv123",
+        }),
+    });
+
+    const json = await res.json();
+    return json;
+};
+
 app.use(cors({ origin: ["https://travel-blog-front-kappa.vercel.app", "http://localhost:5173"] }));
 
 const start = async () => {

@@ -1,6 +1,4 @@
 import { CollectionConfig } from "payload/types";
-import React from "react";
-import { DeleteRestoreUser } from "../components/users/delete.user";
 
 const Users: CollectionConfig = {
     slug: "users", // specify your own slug
