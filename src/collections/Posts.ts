@@ -86,6 +86,10 @@ const Posts: CollectionConfig = {
                 position: "sidebar",
             },
         },
+        {
+            name: "slug",
+            type: "text",
+        },
     ],
 };
 
