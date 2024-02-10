@@ -39,7 +39,15 @@ const resetPassword = async () => {
     return json;
 };
 
-app.use(cors({ origin: ["https://travel-blog-front-kappa.vercel.app", "http://localhost:5173"] }));
+app.use(
+    cors({
+        origin: [
+            "https://travel-blog-front-kappa.vercel.app",
+            "http://localhost:5173",
+            "https://camelface.vercel.app",
+        ],
+    })
+);
 
 const start = async () => {
     // Initialize Payload
