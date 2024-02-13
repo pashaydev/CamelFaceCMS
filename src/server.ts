@@ -1,9 +1,14 @@
 import express from "express";
 import payload from "payload";
 import cors from "cors";
+import { Server } from "socket.io";
+import { createServer } from "http";
+import { join } from "path";
 
 require("dotenv").config();
 const app = express();
+const server = createServer(app);
+const io = new Server(server);
 
 // Redirect root to Admin panel
 app.get("/", (_, res) => {
@@ -13,6 +18,44 @@ app.get("/", (_, res) => {
 app.get("/reset-password", async (_, res) => {
     const json = await resetPassword();
     res.send(json);
+});
+
+let users = {};
+
+io.on("connection", socket => {
+    console.log("a user connected");
+
+    socket.on("join", data => {
+        users[socket.id] = {
+            id: socket.id,
+            ...data,
+        };
+        console.log(users);
+        io.emit("users", users);
+    });
+
+    socket.on("message", data => {
+        console.log(data);
+        io.emit("message", data);
+    });
+
+    socket.on("leave", data => {
+        console.log(data);
+        delete users[socket.id];
+        io.emit("users", users);
+    });
+
+    socket.on("disconnect", () => {
+        console.log("user disconnected");
+        delete users[socket.id];
+    });
+
+    socket.on("mousemove", data => {
+        console.log(data);
+        users[socket.id].x = data.x;
+        users[socket.id].y = data.y;
+        io.emit("users", users);
+    });
 });
 
 const resetPassword = async () => {
@@ -61,8 +104,7 @@ const start = async () => {
     });
 
     // Add your own express routes here
-
-    app.listen(process.env.PORT ?? 3000);
+    server.listen(process.env.PORT ?? 3000);
 };
 
 start();
