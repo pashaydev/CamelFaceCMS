@@ -1,7 +1,3 @@
-# illuspark-admin
-
-This project is created for the Illuspark Admin Panel.
-
 ## How to Use
 
 `yarn dev` will start up your application and reload on any changes.
