@@ -74,7 +74,7 @@ const resetPassword = async () => {
         },
         body: JSON.stringify({
             token: token,
-            password: "Aasdasd213vvv123",
+            password: "",
         }),
     });
 
@@ -84,11 +84,7 @@ const resetPassword = async () => {
 
 app.use(
     cors({
-        origin: [
-            "https://travel-blog-front-kappa.vercel.app",
-            "http://localhost:5173",
-            "https://camelface.vercel.app",
-        ],
+        origin: ["http://localhost:5173", "https://camelface.vercel.app"],
     })
 );
 
