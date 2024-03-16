@@ -27,7 +27,7 @@ const Media: CollectionConfig = {
         disableLocalStorage: true,
         adminThumbnail: ({ doc }) =>
             `https://storage.googleapis.com/travel-blog/media/${doc.filename}`,
-        mimeTypes: ["image/*"],
+        mimeTypes: ["image/*", "video/*", "audio/*"],
     },
     fields: [],
     hooks: {

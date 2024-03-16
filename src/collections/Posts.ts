@@ -5,6 +5,7 @@ const Posts: CollectionConfig = {
     admin: {
         defaultColumns: [
             "backgroundImage",
+            "video",
             "title",
             "textColor",
             "backgroundColor",
@@ -20,15 +21,20 @@ const Posts: CollectionConfig = {
     },
     access: {
         read: () => true,
+        admin: () => true,
     },
     fields: [
         {
-            name: "backgroundImage", // required
-            type: "upload", // required
-            relationTo: "media", // required
+            name: "backgroundImage",
+            type: "upload",
+            relationTo: "media",
             required: true,
         },
-
+        {
+            name: "video",
+            type: "upload",
+            relationTo: "media",
+        },
         {
             name: "title",
             type: "text",
