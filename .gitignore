@@ -3,5 +3,7 @@ dist
 /media
 node_modules
 .DS_Store
-.env
 .npmrc
+npm-debug.log
+.DS_Store
+/*.env
