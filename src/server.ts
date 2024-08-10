@@ -3,12 +3,16 @@ import payload from "payload";
 import cors from "cors";
 import { Server } from "socket.io";
 import { createServer } from "http";
-import { join } from "path";
 
 require("dotenv").config();
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: /^(http:\/\/localhost:5173|https:\/\/camelface\.vercel\.app)$/i,
+        methods: ["GET", "POST"],
+    },
+});
 
 // Redirect root to Admin panel
 app.get("/", (_, res) => {
@@ -52,6 +56,14 @@ io.on("connection", socket => {
 
     socket.on("mousemove", data => {
         console.log(data);
+
+        if (!users[socket.id]) {
+            users[socket.id] = {
+                id: socket.id,
+                x: 0,
+                y: 0,
+            };
+        }
         users[socket.id].x = data.x;
         users[socket.id].y = data.y;
         io.emit("users", users);
