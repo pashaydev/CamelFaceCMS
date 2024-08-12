@@ -5,16 +5,18 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 
 require("dotenv").config();
+
+const origins = [
+    "http://localhost:5173",
+    "https://camelface.vercel.app",
+    "https://www.camelface.pro",
+    "https://camelface.pro",
+];
 const app = express();
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: [
-            "http://localhost:5173",
-            "https://camelface.vercel.app",
-            "https://www.camelface.pro",
-            "https://camelface.pro",
-        ], // origin: "https://camelface.vercel.app",
+        origin: origins,
         methods: ["GET", "POST"],
     },
 });
@@ -101,7 +103,7 @@ const resetPassword = async () => {
 
 app.use(
     cors({
-        origin: ["http://localhost:5173", "https://camelface.vercel.app"],
+        origin: origins,
     })
 );
 
