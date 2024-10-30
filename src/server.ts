@@ -93,7 +93,7 @@ const resetPassword = async () => {
         },
         body: JSON.stringify({
             token: token,
-            password: "1234213123SDAFasdasd",
+            password: "",
         }),
     });
 

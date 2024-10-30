@@ -45,6 +45,7 @@ export default buildConfig({
         `http://localhost:${process.env.PORT || 3000}`,
         "https://travelblogcms.onrender.com",
         "https://camelface.vercel.app",
+        "https://camelface-old-wildflower-6184.fly.dev",
     ],
     typescript: {
         outputFile: path.resolve(__dirname, "payload-types.ts"),
