@@ -1,16 +1,20 @@
-import { buildConfig } from "payload/config";
+import { lexicalEditor } from "@payloadcms/richtext-lexical"; // beta
 import path from "path";
 import Posts from "./collections/Posts";
 import AdminUsers from "./collections/AdminUsers";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { gcsAdapter } from "@payloadcms/plugin-cloud-storage/gcs";
-import dotenv from "dotenv";
+import { mongooseAdapter } from "@payloadcms/db-mongodb";
+import { viteBundler } from "@payloadcms/bundler-vite";
+import { buildConfig } from "payload/config";
+
 import Media from "./collections/Media";
-import Comments from "./collections/Comments";
 import Users from "./collections/Users";
 import Categories from "./collections/Category";
-import Countries from "./collections/Countries";
+
+import dotenv from "dotenv";
 dotenv.config();
+
 //GCS Adapter
 const adapter = gcsAdapter({
     bucket: process.env.GCS_BUCKET,
@@ -20,11 +24,16 @@ const adapter = gcsAdapter({
 });
 
 export default buildConfig({
+    editor: lexicalEditor({}),
     serverURL: process.env.SERVER_URL,
     admin: {
-        user: AdminUsers.slug,
+        bundler: viteBundler(),
+        user: "admin-users",
     },
-    collections: [Posts, AdminUsers, Users, Media, Comments, Categories, Countries],
+    db: mongooseAdapter({
+        url: process.env.MONGODB_URI,
+    }),
+    collections: [Posts, AdminUsers, Users, Media, Categories],
     upload: {
         limits: {
             fileSize: 5000000, // 5MB, written in bytes

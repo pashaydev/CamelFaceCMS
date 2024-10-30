@@ -4,17 +4,12 @@ const Posts: CollectionConfig = {
     slug: "posts",
     admin: {
         defaultColumns: [
-            "backgroundImage",
-            "video",
             "title",
             "textColor",
             "backgroundColor",
-            "author",
-            "country",
             "publishedDate",
             "content",
             "category",
-            "status",
         ],
         useAsTitle: "title",
         group: "Blog",
@@ -24,17 +19,6 @@ const Posts: CollectionConfig = {
         admin: () => true,
     },
     fields: [
-        {
-            name: "backgroundImage",
-            type: "upload",
-            relationTo: "media",
-            required: true,
-        },
-        {
-            name: "video",
-            type: "upload",
-            relationTo: "media",
-        },
         {
             name: "title",
             type: "text",
@@ -49,18 +33,7 @@ const Posts: CollectionConfig = {
             type: "text",
             required: true,
         },
-        {
-            name: "author",
-            type: "relationship",
-            relationTo: "users",
-            required: true,
-        },
-        {
-            name: "country",
-            type: "relationship",
-            relationTo: "countries",
-            required: true,
-        },
+
         {
             name: "publishedDate",
             type: "date",
@@ -73,24 +46,6 @@ const Posts: CollectionConfig = {
             name: "category",
             type: "relationship",
             relationTo: "categories",
-        },
-        {
-            name: "status",
-            type: "select",
-            options: [
-                {
-                    value: "draft",
-                    label: "Draft",
-                },
-                {
-                    value: "published",
-                    label: "Published",
-                },
-            ],
-            defaultValue: "draft",
-            admin: {
-                position: "sidebar",
-            },
         },
         {
             name: "slug",
